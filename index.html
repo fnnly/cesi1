@@ -5,7 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JM最新版购买</title>
     <style>
-        /* 新增样式 */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            margin: 15px 0;
+        }
+        .payment-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .payment-option {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 250px;
+        }
+        .payment-img {
+            max-width: 200px;
+            margin: 15px auto;
+            display: none;
+        }
+        .btn {
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn-pay {
+            background-color: #2196F3;
+        }
+        .btn-pay:hover {
+            background-color: #0b7dda;
+        }
+        .btn-action {
+            background-color: #f44336;
+        }
+        .btn-action:hover {
+            background-color: #d32f2f;
+        }
+        .btn-resource {
+            background-color: #4CAF50;
+        }
+        .btn-resource:hover {
+            background-color: #45a049;
+        }
+        .info-box {
+            display: none;
+            font-size: 18px;
+            margin: 25px auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            line-height: 1.6;
+            border: 2px solid;
+        }
+        .solution-text {
+            color: #ff0000;
+            border-color: #ff0000;
+            background-color: #fff0f0;
+        }
+        .custom-text {
+            color: #333;
+            border-color: #4CAF50;
+            background-color: #f0fff4;
+        }
         .resource-panel {
             display: none;
             margin: 15px auto;
@@ -38,7 +121,25 @@
     </style>
 </head>
 <body>
-    <!-- 其他部分保持不变 -->
+    <h1>JM最新版8块</h1>
+    <p>付款时备注快手号名字</p>
+    <p>加QQ群1042353516领取</p>
+    <p>私信快手主播拿进裙密码</p>
+    <p>放心，主播是诚信的，主播看到后会第一时间发密码的</p>
+
+    <div class="payment-container">
+        <div class="payment-option">
+            <p>微信扫码付款</p>
+            <img id="wechat-qr" src="https://sfile.chatglm.cn/chatglm4/9cf34885-7efc-46fb-9134-c566a81de03b.jpg?image_process=format,webp&time=0" class="payment-img" alt="微信付款码">
+            <button class="btn btn-pay" onclick="showPayment('wechat')">微信支付</button>
+        </div>
+        
+        <div class="payment-option">
+            <p>支付宝扫码付款</p>
+            <img id="alipay-qr" src="https://sfile.chatglm.cn/chatglm4/e0a0bf62-c712-4b47-a20f-9a51df8f16cd.jpg?image_process=format,webp&time=0" class="payment-img" alt="支付宝付款码">
+            <button class="btn btn-pay" onclick="showPayment('alipay')">支付宝支付</button>
+        </div>
+    </div>
 
     <div class="action-buttons">
         <button class="btn btn-action" onclick="showQQGroup()">领取JM</button>
@@ -46,11 +147,18 @@
         <button class="btn btn-resource" onclick="toggleResource()">其他资源</button>
     </div>
 
-    <!-- 新增资源面板 -->
     <div class="resource-panel" id="resourcePanel">
         <button class="sub-btn" onclick="showContent(1)">资源一</button>
         <button class="sub-btn" onclick="showContent(2)">资源二</button>
         <button class="sub-btn" onclick="showContent(3)">资源三</button>
+    </div>
+
+    <div id="qq-group" class="info-box">
+        QQ群号：1042353516
+    </div>
+
+    <div id="solution-text" class="info-box solution-text">
+        挂梯子解决JM更新问题，我有两种梯子，一种每天免费一小时的9块，一种永久破解版的无限时长15块，私信快手主播拿进梯子的群号
     </div>
 
     <!-- 自定义内容区域 -->
@@ -73,23 +181,39 @@
     </div>
 
     <script>
-        // 新增功能函数
-        let resourceVisible = false;
+        // 支付相关功能
+        function showPayment(type) {
+            document.getElementById('wechat-qr').style.display = type === 'wechat' ? 'block' : 'none';
+            document.getElementById('alipay-qr').style.display = type === 'alipay' ? 'block' : 'none';
+        }
+        
+        // 领取功能
+        function showQQGroup() {
+            document.getElementById('qq-group').style.display = 'block';
+            alert('请加QQ群：1042353516');
+        }
 
+        // 解决方案显示
+        function showSolution() {
+            const solutionDiv = document.getElementById('solution-text');
+            solutionDiv.style.display = 'block';
+            solutionDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 资源面板功能
+        let resourceVisible = false;
         function toggleResource() {
             const panel = document.getElementById('resourcePanel');
             resourceVisible = !resourceVisible;
             panel.style.display = resourceVisible ? 'block' : 'none';
-            // 关闭时隐藏所有内容
             if(!resourceVisible) {
                 document.querySelectorAll('.custom-content').forEach(el => el.style.display = 'none');
             }
         }
 
+        // 内容显示功能
         function showContent(num) {
-            // 隐藏所有内容
             document.querySelectorAll('.custom-content').forEach(el => el.style.display = 'none');
-            // 显示指定内容
             const content = document.getElementById('content' + num);
             content.style.display = 'block';
             content.scrollIntoView({ behavior: 'smooth' });

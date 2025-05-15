@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JM最新版购买</title>
+    <style>
+        /* 新增样式 */
+        .resource-panel {
+            display: none;
+            margin: 15px auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        .sub-btn {
+            background-color: #9c27b0;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .sub-btn:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-2px);
+        }
+        .custom-content {
+            display: none;
+            padding: 20px;
+            margin: 15px auto;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            max-width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 其他部分保持不变 -->
+
+    <div class="action-buttons">
+        <button class="btn btn-action" onclick="showQQGroup()">领取JM</button>
+        <button class="btn btn-action" onclick="showSolution()">解决JM问题</button>
+        <button class="btn btn-resource" onclick="toggleResource()">其他资源</button>
+    </div>
+
+    <!-- 新增资源面板 -->
+    <div class="resource-panel" id="resourcePanel">
+        <button class="sub-btn" onclick="showContent(1)">资源一</button>
+        <button class="sub-btn" onclick="showContent(2)">资源二</button>
+        <button class="sub-btn" onclick="showContent(3)">资源三</button>
+    </div>
+
+    <!-- 自定义内容区域 -->
+    <div id="content1" class="custom-content">
+        <h3>资源一内容</h3>
+        <p>这里是第一个自定义内容（可编辑）</p>
+        <p>示例文本：最新软件合集下载</p>
+    </div>
+
+    <div id="content2" class="custom-content">
+        <h3>资源二内容</h3>
+        <p>这里是第二个自定义内容（可编辑）</p>
+        <p>示例文本：使用教程文档</p>
+    </div>
+
+    <div id="content3" class="custom-content">
+        <h3>资源三内容</h3>
+        <p>这里是第三个自定义内容（可编辑）</p>
+        <p>示例文本：备用下载链接</p>
+    </div>
+
+    <script>
+        // 新增功能函数
+        let resourceVisible = false;
+
+        function toggleResource() {
+            const panel = document.getElementById('resourcePanel');
+            resourceVisible = !resourceVisible;
+            panel.style.display = resourceVisible ? 'block' : 'none';
+            // 关闭时隐藏所有内容
+            if(!resourceVisible) {
+                document.querySelectorAll('.custom-content').forEach(el => el.style.display = 'none');
+            }
+        }
+
+        function showContent(num) {
+            // 隐藏所有内容
+            document.querySelectorAll('.custom-content').forEach(el => el.style.display = 'none');
+            // 显示指定内容
+            const content = document.getElementById('content' + num);
+            content.style.display = 'block';
+            content.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
